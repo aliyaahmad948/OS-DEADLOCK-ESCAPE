@@ -1,0 +1,408 @@
+/* ==========================================================
+   style.css
+   "Deadlock Simulator" — Navy + Neon Cyber-Security Theme
+   Fonts: Poppins (body) / Orbitron (headings) — falls back to
+   system sans-serif if not installed on this machine.
+   ========================================================== */
+
+.root-background {
+    -fx-background-color: linear-gradient(to bottom right, #111827, #0F172A, #0a0f1c);
+}
+
+/* ---------- Titles (Orbitron-style heading, glowing neon blue) ---------- */
+.title-text {
+    -fx-font-family: "Orbitron", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #38BDF8;
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.65), 22, 0.45, 0, 0);
+}
+
+.subtitle-text {
+    -fx-font-family: "Poppins", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 15px;
+    -fx-text-fill: #94a3b8;
+    -fx-font-style: italic;
+}
+
+.level-label {
+    -fx-font-family: "Orbitron", "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #38BDF8;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.4), 10, 0.3, 0, 0);
+}
+
+/* ---------- Primary buttons — neon blue glass ---------- */
+.game-button {
+    -fx-background-color: rgba(56,189,248,0.12);
+    -fx-text-fill: #e0f2fe;
+    -fx-font-family: "Poppins", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-width: 1.5;
+    -fx-border-color: #38BDF8;
+    -fx-padding: 12 26 12 26;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.35), 12, 0.25, 0, 2);
+}
+
+.game-button:hover {
+    -fx-background-color: rgba(56,189,248,0.25);
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.75), 18, 0.4, 0, 2);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.game-button:pressed {
+    -fx-background-color: rgba(56,189,248,0.35);
+}
+
+/* ---------- Danger buttons — neon red glass ---------- */
+.danger-button {
+    -fx-background-color: rgba(239,68,68,0.12);
+    -fx-text-fill: #fee2e2;
+    -fx-font-family: "Poppins", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-width: 1.5;
+    -fx-border-color: #EF4444;
+    -fx-padding: 12 26 12 26;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.35), 12, 0.25, 0, 2);
+}
+
+.danger-button:hover {
+    -fx-background-color: rgba(239,68,68,0.25);
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.75), 18, 0.4, 0, 2);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+/* ---------- Success buttons — neon green glass (Allocate/Finish) ---------- */
+.success-button {
+    -fx-background-color: rgba(34,197,94,0.12);
+    -fx-text-fill: #dcfce7;
+    -fx-font-family: "Poppins", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-width: 1.4;
+    -fx-border-color: #22C55E;
+    -fx-padding: 9 18 9 18;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.3), 10, 0.2, 0, 1);
+}
+
+.success-button:hover {
+    -fx-background-color: rgba(34,197,94,0.25);
+    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.65), 16, 0.35, 0, 1);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+/* ---------- Labels ---------- */
+.info-label {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-family: "Poppins", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 14px;
+}
+
+.status-label {
+    -fx-text-fill: #38BDF8;
+    -fx-font-family: "Poppins", "Consolas", monospace;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+}
+
+.score-label {
+    -fx-text-fill: #22C55E;
+    -fx-font-family: "Poppins", "Consolas", monospace;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.timer-label {
+    -fx-text-fill: #EF4444;
+    -fx-font-family: "Poppins", "Consolas", monospace;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Glassmorphism info cards (process/resource rows) ---------- */
+.info-card {
+    -fx-background-color: rgba(255,255,255,0.04);
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(56,189,248,0.35);
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 10 14 10 14;
+    -fx-font-family: "Poppins", "Consolas", monospace;
+    -fx-font-size: 13px;
+    -fx-text-fill: #e2e8f0;
+}
+
+.info-card-waiting {
+    -fx-background-color: rgba(239,68,68,0.10);
+    -fx-background-radius: 10;
+    -fx-border-color: #EF4444;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.6;
+    -fx-padding: 10 14 10 14;
+    -fx-font-family: "Poppins", "Consolas", monospace;
+    -fx-font-size: 13px;
+    -fx-text-fill: #fecaca;
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.4), 10, 0.25, 0, 0);
+}
+
+.info-card-finished {
+    -fx-background-color: rgba(34,197,94,0.10);
+    -fx-background-radius: 10;
+    -fx-border-color: #22C55E;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.6;
+    -fx-padding: 10 14 10 14;
+    -fx-font-family: "Poppins", "Consolas", monospace;
+    -fx-font-size: 13px;
+    -fx-text-fill: #bbf7d0;
+    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.4), 10, 0.25, 0, 0);
+}
+
+/* ---------- Glass panel container (holds each list) ---------- */
+.panel-box {
+    -fx-background-color: rgba(255,255,255,0.03);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(56,189,248,0.25);
+    -fx-border-radius: 16;
+    -fx-border-width: 1.2;
+    -fx-padding: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 18, 0.2, 0, 4);
+}
+
+.transparent-scroll, .transparent-scroll .viewport {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+
+.combo-box {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #38BDF8;
+    -fx-font-size: 13px;
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+}
+
+/* ---------- Result screen TextArea — terminal console style ---------- */
+.result-text-area .content {
+    -fx-background-color: #0a0f1a;
+}
+
+.result-text-area {
+    -fx-control-inner-background: #0a0f1a;
+    -fx-text-fill: #22C55E;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: rgba(56,189,248,0.35);
+    -fx-border-width: 1.5;
+    -fx-font-family: "Poppins", "Consolas", monospace;
+    -fx-font-size: 13px;
+}
+
+/* ---------- Result titles ---------- */
+.win-title {
+    -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #22C55E;
+    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.65), 20, 0.45, 0, 0);
+}
+
+.lose-title {
+    -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #EF4444;
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.65), 20, 0.45, 0, 0);
+}
+
+/* ==========================================================
+   Graph Visualization Classes (Node-Graph System)
+   ========================================================== */
+
+.graph-canvas {
+    -fx-background-color: rgba(255,255,255,0.02);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(56,189,248,0.2);
+    -fx-border-radius: 18;
+    -fx-border-width: 1;
+}
+
+/* ---------- Node circles (Process = slightly bigger, Resource = slightly smaller) ---------- */
+.node-circle-process {
+    -fx-fill: radial-gradient(center 35% 35%, radius 70%, #38BDF8, #0F172A);
+    -fx-stroke: #38BDF8;
+    -fx-stroke-width: 2;
+}
+
+.node-circle-resource {
+    -fx-fill: radial-gradient(center 35% 35%, radius 70%, #94a3b8, #0F172A);
+    -fx-stroke: #94a3b8;
+    -fx-stroke-width: 2;
+}
+
+.node-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Node states (override stroke color based on situation) ---------- */
+.node-state-idle {
+    -fx-stroke: #38BDF8;
+}
+
+.node-state-waiting {
+    -fx-stroke: #EF4444;
+    -fx-fill: radial-gradient(center 35% 35%, radius 70%, #EF4444, #0F172A);
+}
+
+.node-state-active {
+    -fx-stroke: #38BDF8;
+    -fx-fill: radial-gradient(center 35% 35%, radius 70%, #38BDF8, #0F172A);
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
+}
+
+.node-state-finished {
+    -fx-stroke: #22C55E;
+    -fx-fill: radial-gradient(center 35% 35%, radius 70%, #22C55E, #0F172A);
+}
+
+.node-state-safe {
+    -fx-stroke: #22C55E;
+    -fx-fill: radial-gradient(center 35% 35%, radius 70%, #22C55E, #0F172A);
+}
+
+.node-state-deadlock {
+    -fx-stroke: #EF4444;
+    -fx-fill: radial-gradient(center 35% 35%, radius 70%, #EF4444, #0F172A);
+}
+
+/* ---------- Connection lines ---------- */
+.connection-line {
+    -fx-stroke-width: 2.5;
+}
+
+.connection-normal {
+    -fx-stroke: #38BDF8;
+    -fx-opacity: 0.75;
+}
+
+.connection-waiting {
+    -fx-stroke: #f59e0b;
+    -fx-opacity: 0.85;
+}
+
+.connection-safe {
+    -fx-stroke: #22C55E;
+    -fx-opacity: 0.9;
+}
+
+.connection-deadlock {
+    -fx-stroke: #EF4444;
+    -fx-opacity: 1.0;
+}
+
+/* ---------- Data packet (moving glowing circle) ---------- */
+.data-packet {
+    -fx-fill: #38BDF8;
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.9), 12, 0.6, 0, 0);
+}
+
+.data-packet-blocked {
+    -fx-fill: #EF4444;
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.9), 12, 0.6, 0, 0);
+}
+
+/* ---------- Deadlock warning card ---------- */
+.warning-card {
+    -fx-background-color: rgba(239,68,68,0.15);
+    -fx-background-radius: 16;
+    -fx-border-color: #EF4444;
+    -fx-border-radius: 16;
+    -fx-border-width: 2;
+    -fx-padding: 16 30 16 30;
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.7), 20, 0.4, 0, 0);
+}
+
+.warning-card-text {
+    -fx-text-fill: #fecaca;
+    -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Safe state card ---------- */
+.safe-card {
+    -fx-background-color: rgba(34,197,94,0.15);
+    -fx-background-radius: 16;
+    -fx-border-color: #22C55E;
+    -fx-border-radius: 16;
+    -fx-border-width: 2;
+    -fx-padding: 16 30 16 30;
+    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.7), 20, 0.4, 0, 0);
+}
+
+.safe-card-text {
+    -fx-text-fill: #bbf7d0;
+    -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Counter labels (Move/Allocation counters) ---------- */
+.counter-label {
+    -fx-text-fill: #94a3b8;
+    -fx-font-family: "Poppins", "Consolas", monospace;
+    -fx-font-size: 13px;
+}
+/* ---------- Instructions Alert dialog theming ---------- */
+.dialog-pane {
+    -fx-background-color: #0F172A;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #111827;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: #38BDF8;
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.dialog-pane .content.label {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: rgba(56,189,248,0.15);
+    -fx-text-fill: #e0f2fe;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #38BDF8;
+    -fx-border-width: 1;
+}
+
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: rgba(56,189,248,0.3);
+}
