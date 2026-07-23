@@ -9,8 +9,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import db.ScoreDatabase;
 import logic.GameManager;
 import model.Level;
+import model.PlayerSession;
 
 /**
  * ResultScreen.java
@@ -36,6 +38,10 @@ public class ResultScreen {
         this.stage = stage;
         this.level = level;
         this.gameManager = gameManager;
+
+        ScoreDatabase db = new ScoreDatabase();
+        String playerName = PlayerSession.getInstance().getPlayerName();
+        db.saveScore(playerName, level.getLevelNumber(), gameManager.getScore());
     }
 
     /**
@@ -45,8 +51,12 @@ public class ResultScreen {
     public Scene getScene() {
 
         GameManager.GameState state = gameManager.getState();
+        String playerName = PlayerSession.getInstance().getPlayerName();
 
         Label resultTitle = new Label();
+
+        Label playerLabel = new Label("Player: " + playerName);
+        playerLabel.getStyleClass().add("info-label");
 
         Label scoreLabel = new Label("Final Score: " + gameManager.getScore());
         scoreLabel.getStyleClass().add("score-label");
@@ -109,7 +119,7 @@ public class ResultScreen {
         buttonBox.setAlignment(Pos.CENTER);
 
         // ---------- Layout ----------
-        VBox layout = new VBox(20, resultTitle, scoreLabel, explanationArea, buttonBox);
+        VBox layout = new VBox(20, resultTitle, playerLabel, scoreLabel, explanationArea, buttonBox);
         layout.getStyleClass().add("root-background");
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(40));

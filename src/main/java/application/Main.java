@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import ui.LoginScreen;
 import ui.MenuScreen;
 
 /**
@@ -24,10 +25,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        MenuScreen menuScreen = new MenuScreen(primaryStage);
-        Scene scene = menuScreen.getScene();
+        LoginScreen loginScreen = new LoginScreen(primaryStage);
+        Scene scene = loginScreen.getScene();
 
-        primaryStage.setTitle("Deadlock Simulator");
+        primaryStage.setTitle("Deadlock Escape Game");
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
 

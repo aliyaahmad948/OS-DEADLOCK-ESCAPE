@@ -123,40 +123,98 @@ public class Level {
     }
 
     /**
-     * Static factory method that builds Level 2 data.
+     * Level 2: 8 processes, 8 resources — BRANCHING scenario.
      *
-     * Level 2: 10 processes, 10 resources — a LONGER safe chain.
-     * Scenario: P1 holds R1 wants R2, P2 holds R2 wants R3, ... , P9 holds R9 wants R10,
-     * P10 holds R10 and waits for nothing (the "escape hatch").
+     * Two separate chains share a common resource:
+     *   Chain A: P1->R1->P2->R2->P3 (P3 has no request, escape hatch A)
+     *   Chain B: P4->R4->P5->R5->P6 (P6 has no request, escape hatch B)
+     *   Cross:  P7 holds R7, wants R2 (shared with Chain A)
+     *           P8 holds R3, wants R8 (shared with Chain B)
      *
-     * Solve order: finish P10 -> P9 -> P8 -> ... -> P1.
-     *
-     * NOTE: This previously used buildCircularScenario(), which created a full
-     * circular wait with NO process able to go first — that made the level a
-     * guaranteed, permanent deadlock with no way to win. Changed to
-     * buildChainScenario() so the level is fully solvable, just with more
-     * steps than Level 1.
+     * Two valid safe paths exist, but finishing wrong process first
+     * can trap the cross-linked processes in deadlock.
      */
     public static Level createLevel2() {
-        int count = 10;
-        Level level = new Level(2, "Level 2: The Long Chain", "Medium", 150);
-        buildChainScenario(level, count);
+        Level level = new Level(2, "Level 2: The Crossroads", "Medium", 120);
+
+        String[] processes = {"P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8"};
+        String[] resources = {"R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8"};
+        for (String p : processes) level.addProcess(p);
+        for (String r : resources) level.addResource(r);
+
+        // Allocations
+        level.addInitialAllocation("P1", "R1");
+        level.addInitialAllocation("P2", "R2");
+        level.addInitialAllocation("P3", "R3");
+        level.addInitialAllocation("P4", "R4");
+        level.addInitialAllocation("P5", "R5");
+        level.addInitialAllocation("P6", "R6");
+        level.addInitialAllocation("P7", "R7");
+        level.addInitialAllocation("P8", "R8");
+
+        // Requests - Chain A
+        level.addInitialRequest("P1", "R2");
+        level.addInitialRequest("P2", "R3");
+
+        // Chain B
+        level.addInitialRequest("P4", "R5");
+        level.addInitialRequest("P5", "R6");
+
+        // Cross-links (make it tricky)
+        level.addInitialRequest("P7", "R2");
+        level.addInitialRequest("P8", "R8");
+
         return level;
     }
 
     /**
-     * Static factory method that builds Level 3 data (OPTIONAL bonus level).
+     * Level 3: 12 processes, 12 resources — SHARED RESOURCE chains.
      *
-     * Level 3: 15 processes, 15 resources — the LONGEST safe chain.
-     * Solve order: finish P15 -> P14 -> ... -> P1.
+     * Three chains that share resources between them:
+     *   Chain A: P1->R1->P2->R2->P3->R3->P4 (P4 escape hatch)
+     *   Chain B: P5->R5->P6->R6->P7->R7->P8 (P8 escape hatch)
+     *   Chain C: P9->R9->P10->R10->P11->R11->P12 (P12 escape hatch)
+     *   Cross-links:
+     *     P2 also wants R6 (shared with Chain B)
+     *     P6 also wants R9 (shared with Chain C)
+     *     P10 also wants R3 (shared with Chain A)
      *
-     * NOTE: Also switched from buildCircularScenario() to buildChainScenario()
-     * for the same reason as Level 2 — a full circular wait cannot be won.
+     * Must finish escape hatches in specific order, then unwind chains.
+     * Wrong order on cross-links -> deadlock.
      */
     public static Level createLevel3() {
-        int count = 15;
-        Level level = new Level(3, "Level 3: The Big Trap", "Hard", 200);
-        buildChainScenario(level, count);
+        Level level = new Level(3, "Level 3: The Web", "Hard", 150);
+
+        String[] processes = {"P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","P11","P12"};
+        String[] resources = {"R1","R2","R3","R4","R5","R6","R7","R8","R9","R10","R11","R12"};
+        for (String p : processes) level.addProcess(p);
+        for (String r : resources) level.addResource(r);
+
+        // Allocations
+        for (int i = 1; i <= 12; i++) {
+            level.addInitialAllocation("P" + i, "R" + i);
+        }
+
+        // Chain A internal
+        level.addInitialRequest("P1", "R2");
+        level.addInitialRequest("P2", "R3");
+        level.addInitialRequest("P3", "R4");
+
+        // Chain B internal
+        level.addInitialRequest("P5", "R6");
+        level.addInitialRequest("P6", "R7");
+        level.addInitialRequest("P7", "R8");
+
+        // Chain C internal
+        level.addInitialRequest("P9", "R10");
+        level.addInitialRequest("P10", "R11");
+        level.addInitialRequest("P11", "R12");
+
+        // Cross-links (make it a web)
+        level.addInitialRequest("P2", "R6");
+        level.addInitialRequest("P6", "R9");
+        level.addInitialRequest("P10", "R3");
+
         return level;
     }
 

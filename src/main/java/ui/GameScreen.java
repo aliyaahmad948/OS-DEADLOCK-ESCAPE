@@ -75,7 +75,7 @@ public class GameScreen {
     public Scene getScene() {
 
         // ---------- Glowing top title ----------
-        Label mainTitle = new Label("DEADLOCK SIMULATOR");
+        Label mainTitle = new Label("DEADLOCK ESCAPE GAME");
         mainTitle.getStyleClass().add("title-text");
         mainTitle.setStyle(mainTitle.getStyle() + "-fx-font-size: 26px;");
 
@@ -149,11 +149,13 @@ public class GameScreen {
         allocateButton.getStyleClass().add("success-button");
         allocateButton.setOnAction(e -> handleAllocate());
 
-        // "Release" finishes the selected process, which releases every
-        // resource it holds (matches original GameManager.completeProcess behavior).
         Button releaseButton = new Button("Release");
         releaseButton.getStyleClass().add("success-button");
-        releaseButton.setOnAction(e -> handleFinish());
+        releaseButton.setOnAction(e -> handleRelease());
+
+        Button finishButton = new Button("Finish");
+        finishButton.getStyleClass().add("game-button");
+        finishButton.setOnAction(e -> handleFinish());
 
         Button detectButton = new Button("Detect Deadlock");
         detectButton.getStyleClass().add("game-button");
@@ -171,7 +173,7 @@ public class GameScreen {
         HBox controlsRow = new HBox(10,
                 processFieldLabel, processDropdown,
                 resourceFieldLabel, resourceDropdown,
-                allocateButton, releaseButton, detectButton, restartButton);
+                allocateButton, releaseButton, finishButton, detectButton, restartButton);
         controlsRow.setAlignment(Pos.CENTER);
         controlsRow.setPadding(new Insets(10));
 
@@ -241,8 +243,24 @@ public class GameScreen {
         String message = gameManager.allocateResource(processName, resourceName);
         statusLabel.setText(message);
 
-        // Count it as an allocation attempt for the on-screen counter
         allocationCount++;
+
+        refreshUI();
+        checkGameEnd();
+    }
+
+    private void handleRelease() {
+        String processName = processDropdown.getValue();
+        String resourceName = resourceDropdown.getValue();
+
+        if (processName == null || resourceName == null) {
+            statusLabel.setText("Please select both a process and a resource to release.");
+            return;
+        }
+
+        moveCount++;
+        String message = gameManager.releaseResource(processName, resourceName);
+        statusLabel.setText(message);
 
         refreshUI();
         checkGameEnd();

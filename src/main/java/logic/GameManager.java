@@ -35,6 +35,7 @@ public class GameManager {
     private String lastMessage;
 
     private static final int POINTS_PER_ALLOCATION = 10;
+    private static final int POINTS_PER_RESOURCE_RELEASED = 10;
     private static final int POINTS_PER_PROCESS_FINISHED = 25;
     private static final int POINTS_BONUS_ON_WIN = 50;
 
@@ -116,6 +117,46 @@ public class GameManager {
 
             checkForDeadlock();
         }
+
+        return lastMessage;
+    }
+
+    public String releaseResource(String processName, String resourceName) {
+        if (state != GameState.PLAYING) {
+            return "Game is already over.";
+        }
+
+        Process p = findProcess(processName);
+        Resource r = findResource(resourceName);
+
+        if (p == null || r == null) {
+            return "Invalid process or resource.";
+        }
+
+        if (p.isFinished()) {
+            return processName + " has already finished.";
+        }
+
+        if (p.isWaiting()) {
+            return processName + " cannot release while waiting for " + p.getWaitingFor() + ".";
+        }
+
+        if (!p.holdsResource(resourceName)) {
+            return processName + " does not hold " + resourceName + ".";
+        }
+
+        r.release();
+        p.removeResource(resourceName);
+        score += POINTS_PER_RESOURCE_RELEASED;
+        lastMessage = processName + " released " + resourceName + ".";
+
+        if (p.getHeldResources().isEmpty() && !p.isWaiting()) {
+            p.setFinished(true);
+            score += POINTS_PER_PROCESS_FINISHED;
+            lastMessage = processName + " released " + resourceName + " and finished!";
+        }
+
+        checkWinCondition();
 
         return lastMessage;
     }

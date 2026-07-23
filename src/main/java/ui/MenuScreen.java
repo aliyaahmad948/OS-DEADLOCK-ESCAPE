@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import model.PlayerSession;
+
 /**
  * MenuScreen.java
  *
@@ -29,24 +31,36 @@ public class MenuScreen {
         Label titleLabel = new Label("Deadlock Escape Game");
         titleLabel.getStyleClass().add("title-text");
 
+        String playerName = PlayerSession.getInstance().getPlayerName();
+        Label greetingLabel = new Label("Welcome, " + playerName + "!");
+        greetingLabel.getStyleClass().add("subtitle-text");
+
         Label subtitleLabel = new Label("Can your processes escape the trap?");
         subtitleLabel.getStyleClass().add("subtitle-text");
 
         Button startButton = new Button("Start Game");
+        Button leaderboardButton = new Button("Leaderboard");
         Button instructionsButton = new Button("Instructions");
         Button exitButton = new Button("Exit");
 
         startButton.getStyleClass().add("game-button");
+        leaderboardButton.getStyleClass().add("game-button");
         instructionsButton.getStyleClass().add("game-button");
         exitButton.getStyleClass().add("danger-button");
 
         startButton.setPrefWidth(200);
+        leaderboardButton.setPrefWidth(200);
         instructionsButton.setPrefWidth(200);
         exitButton.setPrefWidth(200);
 
         startButton.setOnAction(e -> {
             LevelSelectionScreen levelSelectionScreen = new LevelSelectionScreen(stage);
             stage.setScene(levelSelectionScreen.getScene());
+        });
+
+        leaderboardButton.setOnAction(e -> {
+            LeaderboardScreen leaderboardScreen = new LeaderboardScreen(stage);
+            stage.setScene(leaderboardScreen.getScene());
         });
 
         instructionsButton.setOnAction(e -> showInstructions());
@@ -57,7 +71,7 @@ public class MenuScreen {
         layout.getStyleClass().add("root-background");
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(40));
-        layout.getChildren().addAll(titleLabel, subtitleLabel, startButton, instructionsButton, exitButton);
+        layout.getChildren().addAll(titleLabel, greetingLabel, subtitleLabel, startButton, leaderboardButton, instructionsButton, exitButton);
 
         Scene scene = new Scene(layout, 1200, 800);
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
@@ -73,13 +87,16 @@ public class MenuScreen {
         alert.setTitle("Instructions");
         alert.setHeaderText("How to Play - Deadlock Escape Game");
         alert.setContentText(
-                "Each Process (character) needs Resources (objects) to finish its task.\n\n" +
-                        "- Click a process, then request a resource for it.\n" +
-                        "- If the resource is free, it is granted immediately.\n" +
-                        "- If it's held by another process, your process starts WAITING for it.\n" +
-                        "- Finish a process to release all resources it holds.\n\n" +
-                        "GOAL: Find a safe order to finish every process.\n" +
-                        "WARNING: If processes end up waiting for each other in a circle, " +
+                "Each Process needs Resources to finish its task.\n\n" +
+                        "ALLOCATE: Select process + resource, click Allocate.\n" +
+                        "  - If free, resource is granted immediately.\n" +
+                        "  - If held by another process, your process starts WAITING.\n\n" +
+                        "RELEASE: Select process + resource, click Release.\n" +
+                        "  - Releases only ONE resource from the process.\n" +
+                        "  - Process auto-finishes when all resources are released.\n\n" +
+                        "FINISH: Manually finish a process with no resources left.\n\n" +
+                        "GOAL: Release resources in the right order to finish every process.\n" +
+                        "WARNING: If processes wait for each other in a circle, " +
                         "that's a DEADLOCK and you lose!"
         );
 

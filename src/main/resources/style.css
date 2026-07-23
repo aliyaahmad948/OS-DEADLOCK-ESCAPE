@@ -406,3 +406,30 @@
 .dialog-pane .button-bar .button:hover {
     -fx-background-color: rgba(56,189,248,0.3);
 }
+
+/* ---------- Login screen text field ---------- */
+.login-text-field {
+    -fx-background-color: rgba(255,255,255,0.06);
+    -fx-border-color: #38BDF8;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-text-fill: #e0f2fe;
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-size: 15px;
+    -fx-prompt-text-fill: #64748b;
+    -fx-padding: 10 16 10 16;
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.25), 10, 0.2, 0, 2);
+}
+
+.login-text-field:focused {
+    -fx-border-color: #60a5fa;
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.5), 16, 0.35, 0, 2);
+}
+
+/* ---------- Error label ---------- */
+.error-label {
+    -fx-text-fill: #EF4444;
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+}
