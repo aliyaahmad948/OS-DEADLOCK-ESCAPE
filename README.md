@@ -203,17 +203,6 @@ Or open in **IntelliJ IDEA** → Right-click `Main.java` → **Run**
 
 ---
 
-## Screenshots
-
-<div align="center">
-
-| Login Screen | Game Screen | Leaderboard |
-|:---:|:---:|:---:|
-| *Enter your name* | *Interactive graph + controls* | *Score tracking* |
-
-</div>
-
----
 
 ## Scoring System
 
