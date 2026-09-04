@@ -1,24 +1,58 @@
 package db;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
 public class ScoreDatabase {
+
+    // DB settings are read from config.properties (project root) at runtime.
+    // The file is git-ignored so real credentials are NEVER committed.
+    // Copy config.properties.example -> config.properties and set your values.
+    // If the file is missing, safe defaults are used (empty password).
+    private static final String DB_HOST;
+    private static final String DB_PORT;
+    private static final String DB_NAME;
+    private static final String DB_USER;
+    private static final String DB_PASS;
+    private static final String DB_URL;
 
     // useSSL=false avoids SSL handshake instability on localhost;
     // allowPublicKeyRetrieval=true is REQUIRED for MySQL 8's default
     // caching_sha2_password auth over a non-SSL connection (otherwise the
     // classic "Public Key Retrieval is not allowed" error makes saves fail).
     // Short timeouts mean the app never hangs if MySQL is down.
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/deadlock_game"
-            + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
-            + "&connectTimeout=3000&socketTimeout=5000";
-    private static final String DB_USER = "root";
-    private static final String DB_PASS = "abc123";
+    private static final String JDBC_OPTIONS =
+            "useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+                    + "&connectTimeout=3000&socketTimeout=5000";
+
+    static {
+        Properties props = new Properties();
+        File configFile = new File("config.properties");
+        if (configFile.exists()) {
+            try (FileInputStream in = new FileInputStream(configFile)) {
+                props.load(in);
+            } catch (IOException e) {
+                System.out.println("Config Error: could not read config.properties — " + e.getMessage());
+            }
+        } else {
+            System.out.println("Config: config.properties not found — using defaults (empty DB password). "
+                    + "Copy config.properties.example to config.properties and set DB_PASS.");
+        }
+        DB_HOST = props.getProperty("DB_HOST", "localhost");
+        DB_PORT = props.getProperty("DB_PORT", "3306");
+        DB_NAME = props.getProperty("DB_NAME", "deadlock_game");
+        DB_USER = props.getProperty("DB_USER", "root");
+        DB_PASS = props.getProperty("DB_PASS", "");
+        DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?" + JDBC_OPTIONS;
+    }
 
     private String lastError;
     private boolean available = true;

@@ -291,14 +291,25 @@ CREATE DATABASE deadlock_game;
 
 ### 3. Configure credentials
 
-Edit `src/main/java/db/ScoreDatabase.java`:
+Copy the example config to your own `config.properties` and fill in **your** MySQL values. The real `config.properties` is git-ignored, so your password is never committed:
 
-```java
-private static final String DB_USER = "root";
-private static final String DB_PASS = "your_password";
+```bash
+cp config.properties.example config.properties
 ```
 
-> Login is a lightweight name entry (no account system) — scores and progress are keyed by the name you enter.
+Then edit `config.properties`:
+
+```properties
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=deadlock_game
+DB_USER=root
+DB_PASS=your_password_here        # <-- replace with your real MySQL password
+```
+
+> Credentials are read at runtime from `config.properties` in the project root (see `db/ScoreDatabase.java`). If the file is missing, the app falls back to safe defaults with an empty password — games still run, but scores won't save until you configure the DB.
+
+> **Note on login:** Login is a lightweight name entry (**no account system** — no password, no `users` table). Scores and progress are keyed by the name you enter.
 
 ### 4. Build
 

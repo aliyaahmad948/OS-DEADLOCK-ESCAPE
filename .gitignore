@@ -37,3 +37,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Local database credentials (never commit real passwords) ###
+config.properties
+.env

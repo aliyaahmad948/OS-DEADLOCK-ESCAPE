@@ -1,0 +1,17 @@
+# ============================================================
+# Deadlock Escape Game — MySQL connection settings
+# ============================================================
+# Copy this file to "config.properties" and fill in YOUR OWN
+# values. The real config.properties is listed in .gitignore
+# and will NEVER be committed to the repository.
+#
+# Defaults (used if config.properties is absent):
+#   DB_HOST=localhost  DB_PORT=3306  DB_NAME=deadlock_game
+#   DB_USER=root       DB_PASS=(empty)
+# ============================================================
+
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=deadlock_game
+DB_USER=root
+DB_PASS=your_password_here
