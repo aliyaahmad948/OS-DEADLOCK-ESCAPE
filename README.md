@@ -420,8 +420,8 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more informa
 
 **Alia Ahmad**
 - GitHub: [@aliyaahmad948](https://github.com/aliyaahmad948)
-- LinkedIn: [Your LinkedIn URL]
-- Email: [Your Email Address]
+- LinkedIn: [Alia Ahmad - Software Engineer](https://www.linkedin.com/in/alia-ahmad-swe)
+- Email: [aliyaahmad948@gmail.com](mailto:aliyaahmad948@gmail.com)
 
 ---
 
