@@ -432,7 +432,7 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more informa
 **Alia Ahmad**
 - GitHub: [@aliyaahmad948](https://github.com/aliyaahmad948)
 - LinkedIn: [Alia Ahmad - Software Engineer](https://www.linkedin.com/in/alia-ahmad-swe)
-- Email: [aliyaahmad948@gmail.com](mailto:aliyaahmad948@gmail.com)
+- Questions? [Open an issue on GitHub](https://github.com/aliyaahmad948/OS-DEADLOCK-ESCAPE/issues)
 
 ---
 
