@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import model.PlayerSession;
+import logic.ProgressManager;
 
 public class LoginScreen {
 
@@ -50,6 +51,9 @@ public class LoginScreen {
                 return;
             }
             PlayerSession.getInstance().setPlayerName(name);
+            // Restore this player's stars + level unlocks from MySQL so the
+            // profile shows persistent progress, not just the current session.
+            ProgressManager.getInstance().loadProgressFromDatabase();
             MenuScreen menuScreen = new MenuScreen(stage);
             stage.setScene(menuScreen.getScene());
         });
@@ -63,7 +67,7 @@ public class LoginScreen {
         layout.getChildren().addAll(titleLabel, subtitleLabel, nameLabel, nameField, errorLabel, playButton);
 
         Scene scene = new Scene(layout, 1200, 800);
-        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        ThemeManager.applyTheme(scene);
         return scene;
     }
 }

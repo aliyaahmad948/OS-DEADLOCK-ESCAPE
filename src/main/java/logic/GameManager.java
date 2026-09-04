@@ -261,6 +261,68 @@ public class GameManager {
         return finished;
     }
 
+    /**
+     * BANKER'S ALGORITHM SUPPORT (Phase 13/14):
+     * Simulates granting a resource request WITHOUT permanently modifying the
+     * game state, then checks whether the resulting state has a safe sequence.
+     *
+     * If the request would leave the system in an UNSAFE state (no safe
+     * sequence exists), this returns false and the caller should deny it.
+     *
+     * This is a pure prediction method — the real game state is never changed.
+     */
+    public boolean isRequestSafe(String processName, String resourceName) {
+        Process p = findProcess(processName);
+        Resource r = findResource(resourceName);
+        if (p == null || r == null) {
+            return false;
+        }
+        if (p.isFinished()) {
+            return false;
+        }
+        if (r.isAvailable()) {
+            return true; // granting is always safe — resource is free
+        }
+
+        // ---- Snapshot current state (deep copy of mutable fields) ----
+        List<Object[]> processSnap = new ArrayList<>();
+        for (Process pr : processes) {
+            processSnap.add(new Object[]{pr, new ArrayList<>(pr.getHeldResources()),
+                    pr.isWaiting() ? pr.getWaitingFor() : null, pr.isFinished()});
+        }
+        List<Object[]> resourceSnap = new ArrayList<>();
+        for (Resource rs : resources) {
+            resourceSnap.add(new Object[]{rs, rs.getAllocatedTo(), rs.isAvailable()});
+        }
+
+        // ---- Simulate the request being granted ----
+        // In banker terms, the request is "pending": the process would hold its
+        // current resources and be waiting on this one. Check if the state that
+        // results from granting (process can proceed holding the requested
+        // resource) has a safe sequence.
+        try {
+            // Try: give the resource to p (preempt a wait scenario by simply
+            // checking if there exists ANY safe sequence that grants p's request)
+            // We model it as: p is waiting for r (worst case).
+            p.setWaitingFor(resourceName);
+            boolean safe = !findSafeSequence().isEmpty();
+            return safe;
+        } finally {
+            // ---- Restore original state ----
+            for (Object[] snap : processSnap) {
+                Process pr = (Process) snap[0];
+                pr.setHeldResourcesSnapshot((List<String>) snap[1]);
+                pr.setWaitingFor((String) snap[2]);
+                pr.setFinished((Boolean) snap[3]);
+            }
+            for (Object[] snap : resourceSnap) {
+                Resource rs = (Resource) snap[0];
+                rs.setAllocatedTo((String) snap[1]);
+                rs.setAvailable((Boolean) snap[2]);
+            }
+        }
+    }
+
     public void tick() {
         if (state != GameState.PLAYING) {
             return;

@@ -16,12 +16,31 @@ import java.util.List;
  * Level = A specific deadlock scenario/puzzle setup
  * initialAllocations = Which resource each process starts by holding
  * initialRequests = Which resource each process starts by waiting for
+ *
+ * PHASE 1 REFACTOR (backward-compatible):
+ * Added optional metadata fields for the enhanced game architecture:
+ * - gameMode        : which concept mode this level belongs to
+ * - difficultyEnum  : difficulty rating
+ * - conceptTaught   : what OS concept this level teaches
+ * - mission         : the level's mission/objectives
+ * - hintCount       : how many hints are available for this level
+ *
+ * All original fields, methods, and the original constructor are preserved
+ * exactly so existing Level.createLevel1()/createLevel2()/createLevel3()
+ * keep working without modification.
  */
 public class Level {
 
     private int levelNumber;
     private String levelName;
     private String difficulty;
+
+    // ----- Phase 1: new metadata fields (backward-compatible) -----
+    private GameMode gameMode;
+    private Difficulty difficultyEnum;
+    private String conceptTaught;
+    private Mission mission;
+    private int hintCount;
 
     private List<String> processNames;
     private List<String> resourceNames;
@@ -43,6 +62,19 @@ public class Level {
         this.resourceNames = new ArrayList<>();
         this.initialAllocations = new ArrayList<>();
         this.initialRequests = new ArrayList<>();
+        this.hintCount = 0;
+    }
+
+    /**
+     * PHASE 1: Overloaded constructor that also accepts a GameMode.
+     * Delegates to the original constructor for core fields, then stores
+     * the game mode and sets default metadata. Does NOT change the original
+     * constructor behavior.
+     */
+    public Level(int levelNumber, String levelName, String difficulty, int timeLimitSeconds, GameMode gameMode) {
+        this(levelNumber, levelName, difficulty, timeLimitSeconds);
+        this.gameMode = gameMode;
+        this.conceptTaught = (gameMode == null) ? null : gameMode.getDisplayName();
     }
 
     // ---------- Methods to build up level data ----------
@@ -85,6 +117,10 @@ public class Level {
         return timeLimitSeconds;
     }
 
+    public void setTimeLimitSeconds(int timeLimitSeconds) {
+        this.timeLimitSeconds = timeLimitSeconds;
+    }
+
     public List<String> getProcessNames() {
         return processNames;
     }
@@ -99,6 +135,51 @@ public class Level {
 
     public List<String[]> getInitialRequests() {
         return initialRequests;
+    }
+
+    // ---------- Phase 1: new metadata getters & setters (backward-compatible) ----------
+
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+        if (gameMode != null) {
+            this.conceptTaught = gameMode.getDisplayName();
+        }
+    }
+
+    public Difficulty getDifficultyEnum() {
+        return difficultyEnum;
+    }
+
+    public void setDifficultyEnum(Difficulty difficultyEnum) {
+        this.difficultyEnum = difficultyEnum;
+    }
+
+    public String getConceptTaught() {
+        return conceptTaught;
+    }
+
+    public void setConceptTaught(String conceptTaught) {
+        this.conceptTaught = conceptTaught;
+    }
+
+    public Mission getMission() {
+        return mission;
+    }
+
+    public void setMission(Mission mission) {
+        this.mission = mission;
+    }
+
+    public int getHintCount() {
+        return hintCount;
+    }
+
+    public void setHintCount(int hintCount) {
+        this.hintCount = hintCount;
     }
 
     /**

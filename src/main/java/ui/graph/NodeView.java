@@ -156,6 +156,51 @@ public class NodeView extends StackPane {
         }
     }
 
+    /**
+     * Toggles the player's selection ring: gold glow + slight zoom.
+     * Independent of the state-driven glow effects on the circle
+     * (they can coexist).
+     */
+    public void setSelectionMarker(boolean selected) {
+        if (selected) {
+            DropShadow glow = new DropShadow();
+            glow.setColor(Color.web("#FBBF24"));
+            glow.setRadius(14);
+            this.setEffect(glow);
+            setScaleX(1.12);
+            setScaleY(1.12);
+        } else {
+            this.setEffect(null);
+            setScaleX(1.0);
+            setScaleY(1.0);
+        }
+    }
+
+    /**
+     * One-shot green glow pulse — used when the process finishes or when the
+     * safe sequence is celebrated. Unlike applyState(SAFE), this does NOT
+     * change the persistent style classes; the next refresh() restores the
+     * node's real state.
+     */
+    public void flash() {
+        stopPulse();
+        circle.setEffect(null);
+
+        DropShadow glow = new DropShadow();
+        glow.setColor(Color.web("#22C55E"));
+        glow.setRadius(15);
+        circle.setEffect(glow);
+
+        pulseTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(glow.radiusProperty(), 15)),
+                new KeyFrame(Duration.seconds(0.35), new KeyValue(glow.radiusProperty(), 42)),
+                new KeyFrame(Duration.seconds(0.7), new KeyValue(glow.radiusProperty(), 15))
+        );
+        pulseTimeline.setCycleCount(2);
+        pulseTimeline.setOnFinished(e -> circle.setEffect(null));
+        pulseTimeline.play();
+    }
+
     public String getNodeId() {
         return nodeId;
     }

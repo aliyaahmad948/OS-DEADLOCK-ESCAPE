@@ -55,6 +55,20 @@ public class Resource {
     }
 
     /**
+     * Restores the allocated-to field (used by simulation helpers).
+     */
+    public void setAllocatedTo(String allocatedTo) {
+        this.allocatedTo = allocatedTo;
+    }
+
+    /**
+     * Restores the available flag (used by simulation helpers).
+     */
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    /**
      * Allocates this resource to a given process.
      * Marks it as no longer available.
      */

@@ -1,7 +1,13 @@
 package ui.graph;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import logic.GameManager;
@@ -32,6 +38,12 @@ public class GraphCanvas extends Pane {
     // connection key ("FROM->TO") -> its visual line
     private Map<String, ConnectionLine> connections = new HashMap<>();
 
+    // node ids currently selected by the player (click-to-select)
+    private final Set<String> selectedNodes = new HashSet<>();
+
+    // notifies GameScreen when the player clicks a node
+    private java.util.function.BiConsumer<String, NodeView.NodeType> nodeClickHandler;
+
     private static final double NODE_COLUMN_GAP = 260;
     private static final double NODE_ROW_GAP = 90;
     private static final double TOP_MARGIN = 60;
@@ -40,6 +52,34 @@ public class GraphCanvas extends Pane {
     public GraphCanvas() {
         this.getStyleClass().add("graph-canvas");
         this.setPrefSize(760, 420);
+        buildLegend();
+    }
+
+    /**
+     * Compact, always-visible legend explaining the node color meanings.
+     * Placed in the top strip of the canvas so it never overlaps nodes.
+     */
+    private void buildLegend() {
+        HBox legend = new HBox(10);
+        legend.getStyleClass().add("graph-legend");
+        legend.setLayoutX(90);
+        legend.setLayoutY(6);
+        legend.getChildren().addAll(
+                legendItem("#EF4444", "Waiting"),
+                legendItem("#38BDF8", "Held / Active"),
+                legendItem("#22C55E", "Finished / Free"),
+                legendItem("#EF4444", "Deadlock Cycle (pulse)")
+        );
+        this.getChildren().add(legend);
+    }
+
+    private HBox legendItem(String color, String text) {
+        Circle dot = new Circle(5, Color.web(color));
+        Label label = new Label(text);
+        label.getStyleClass().add("graph-legend-text");
+        HBox item = new HBox(5, dot, label);
+        item.setAlignment(Pos.CENTER_LEFT);
+        return item;
     }
 
     /**
@@ -65,6 +105,7 @@ public class GraphCanvas extends Pane {
         for (Process p : processes) {
             if (!nodeViews.containsKey(p.getProcessName())) {
                 NodeView node = new NodeView(p.getProcessName(), NodeView.NodeType.PROCESS);
+                wireNodeClick(node);
                 nodeViews.put(p.getProcessName(), node);
                 this.getChildren().add(node);
 
@@ -78,6 +119,7 @@ public class GraphCanvas extends Pane {
         for (Resource r : resources) {
             if (!nodeViews.containsKey(r.getResourceName())) {
                 NodeView node = new NodeView(r.getResourceName(), NodeView.NodeType.RESOURCE);
+                wireNodeClick(node);
                 nodeViews.put(r.getResourceName(), node);
                 this.getChildren().add(node);
 
@@ -90,9 +132,48 @@ public class GraphCanvas extends Pane {
     }
 
     /**
+     * Makes a node clickable for the click-to-select gameplay: a click anywhere
+     * on the circle forwards the node id + type to the registered handler.
+     */
+    private void wireNodeClick(NodeView node) {
+        node.setOnMousePressed(e -> {
+            if (nodeClickHandler != null) {
+                nodeClickHandler.accept(node.getNodeId(), node.getType());
+            }
+        });
+    }
+
+    /** Registers the callback used when the player clicks a graph node. */
+    public void setNodeClickHandler(java.util.function.BiConsumer<String, NodeView.NodeType> handler) {
+        this.nodeClickHandler = handler;
+    }
+
+    /** Highlights/de-highlights a node's selection ring. */
+    public void setNodeSelected(String id, boolean selected) {
+        NodeView node = nodeViews.get(id);
+        if (node == null) return;
+        if (selected) {
+            selectedNodes.add(id);
+        } else {
+            selectedNodes.remove(id);
+        }
+        node.setSelectionMarker(selected);
+    }
+
+    /** Clears all current selections. */
+    public void clearSelection() {
+        for (String id : new HashSet<>(selectedNodes)) {
+            setNodeSelected(id, false);
+        }
+        selectedNodes.clear();
+    }
+
+    /**
      * Lays out process nodes in a left column and resource nodes in a
-     * right column, evenly spaced vertically. Works for any process/resource
-     * count (5, 10, 15...) since it just divides available height.
+     * right column, evenly spaced vertically. Node size and spacing stay
+     * fixed and comfortable regardless of the level's process count; taller
+     * graphs simply grow the canvas height, and the surrounding ScrollPane
+     * provides vertical scrolling to see all nodes.
      */
     private void positionNodes(List<Process> processes, List<Resource> resources) {
         for (int i = 0; i < processes.size(); i++) {
@@ -110,7 +191,8 @@ public class GraphCanvas extends Pane {
             node.setLayoutY(y);
         }
 
-        // Grow the canvas height if there are many processes/resources (Level 2/3)
+        // Grow the canvas height when there are many processes/resources so
+        // the ScrollPane kicks in instead of squeezing the nodes together.
         int maxCount = Math.max(processes.size(), resources.size());
         double requiredHeight = TOP_MARGIN + maxCount * NODE_ROW_GAP + 60;
         this.setPrefHeight(Math.max(420, requiredHeight));
@@ -271,11 +353,45 @@ public class GraphCanvas extends Pane {
     }
 
     /**
+     * Plays a one-shot green glow pulse on the given node (e.g. when a
+     * process finishes). Does not change persistent styling.
+     */
+    public void pulseNode(String nodeId) {
+        NodeView node = nodeViews.get(nodeId);
+        if (node != null) {
+            node.flash();
+        }
+    }
+
+    /**
+     * Sequential green flashes along the safe completion order — a little
+     * "victory sweep" showing how the safe sequence resolves the graph.
+     */
+    public void animateSafeSequence(List<String> order) {
+        List<String> seq = new ArrayList<>(order);
+        if (seq.isEmpty()) return;
+
+        for (int i = 0; i < seq.size(); i++) {
+            final int idx = i;
+            PauseTransition step = new PauseTransition(Duration.millis(idx * 240L));
+            step.setOnFinished(e -> {
+                NodeView node = nodeViews.get(seq.get(idx));
+                if (node != null) {
+                    node.flash();
+                }
+            });
+            step.play();
+        }
+    }
+
+    /**
      * Clears everything — used when restarting a level from scratch.
      */
     public void clearAll() {
         this.getChildren().clear();
         nodeViews.clear();
         connections.clear();
+        selectedNodes.clear();
+        buildLegend();
     }
 }

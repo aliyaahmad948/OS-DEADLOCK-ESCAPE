@@ -18,6 +18,20 @@ import java.util.List;
  */
 public class Process {
 
+    /**
+     * ProcessState represents the current state of a process in the game.
+     * Maps directly to OS process states for educational clarity.
+     *
+     * IDLE     - Process is active, not waiting, not finished. Can request/release resources.
+     * WAITING  - Process is blocked, waiting for an unavailable resource.
+     * FINISHED - Process has completed its task and released all resources.
+     */
+    public enum ProcessState {
+        IDLE,
+        WAITING,
+        FINISHED
+    }
+
     // Name of the process (e.g., "P1", "P2")
     private String processName;
 
@@ -60,6 +74,21 @@ public class Process {
         return finished;
     }
 
+    /**
+     * Returns the current ProcessState derived from the process's actual
+     * internal condition. This is a convenience derived getter — it does NOT
+     * modify any state. Provided as part of Phase 1 model refactoring.
+     */
+    public ProcessState getState() {
+        if (finished) {
+            return ProcessState.FINISHED;
+        }
+        if (isWaiting()) {
+            return ProcessState.WAITING;
+        }
+        return ProcessState.IDLE;
+    }
+
     // ---------- Setters ----------
 
     public void setProcessName(String processName) {
@@ -72,6 +101,14 @@ public class Process {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    /**
+     * Restores the held-resources list from a snapshot (used by simulation
+     * helpers such as GameManager.isRequestSafe for Banker's Algorithm checks).
+     */
+    public void setHeldResourcesSnapshot(List<String> heldResources) {
+        this.heldResources = heldResources;
     }
 
     // ---------- Resource Management Methods ----------

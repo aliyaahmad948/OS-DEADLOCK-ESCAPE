@@ -75,7 +75,7 @@ public class LevelSelectionScreen {
         layout.getChildren().addAll(titleLabel, levelButtonsRow, backButton);
 
         Scene scene = new Scene(layout, 1200, 800);
-        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        ThemeManager.applyTheme(scene);
         return scene;
     }
 

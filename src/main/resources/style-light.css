@@ -1,42 +1,42 @@
 /* ==========================================================
-   style.css
-   "Deadlock Simulator" — Navy + Neon Cyber-Security Theme
-   Fonts: Poppins (body) / Orbitron (headings) — falls back to
-   system sans-serif if not installed on this machine.
+   style-light.css
+   "Deadlock Simulator" — Light variant of the Navy + Neon theme.
+   Same class names as style.css, flushed surfaces + dark text.
+   Fonts: Poppins (body) / Orbitron (headings).
    ========================================================== */
 
 .root-background {
-    -fx-background-color: linear-gradient(to bottom right, #111827, #0F172A, #0a0f1c);
+    -fx-background-color: linear-gradient(to bottom right, #E2E8F0, #F1F5F9, #F8FAFC);
 }
 
-/* ---------- Titles (Orbitron-style heading, glowing neon blue) ---------- */
+/* ---------- Titles ---------- */
 .title-text {
     -fx-font-family: "Orbitron", "Segoe UI", "Arial", sans-serif;
     -fx-font-size: 40px;
     -fx-font-weight: bold;
-    -fx-text-fill: #38BDF8;
-    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.65), 22, 0.45, 0, 0);
+    -fx-text-fill: #0284C7;
+    -fx-effect: dropshadow(gaussian, rgba(2,132,199,0.35), 22, 0.45, 0, 0);
 }
 
 .subtitle-text {
     -fx-font-family: "Poppins", "Segoe UI", "Arial", sans-serif;
     -fx-font-size: 15px;
-    -fx-text-fill: #94a3b8;
+    -fx-text-fill: #475569;
     -fx-font-style: italic;
 }
 
 .level-label {
     -fx-font-family: "Orbitron", "Segoe UI", "Arial", sans-serif;
-    -fx-text-fill: #38BDF8;
+    -fx-text-fill: #0369A1;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.4), 10, 0.3, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(2,132,199,0.25), 10, 0.3, 0, 0);
 }
 
-/* ---------- Primary buttons — neon blue glass ---------- */
+/* ---------- Primary buttons — neon blue on light ---------- */
 .game-button {
-    -fx-background-color: rgba(56,189,248,0.12);
-    -fx-text-fill: #e0f2fe;
+    -fx-background-color: rgba(56,189,248,0.20);
+    -fx-text-fill: #075985;
     -fx-font-family: "Poppins", "Segoe UI", "Arial", sans-serif;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -50,20 +50,20 @@
 }
 
 .game-button:hover {
-    -fx-background-color: rgba(56,189,248,0.25);
-    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.75), 18, 0.4, 0, 2);
+    -fx-background-color: rgba(56,189,248,0.35);
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.6), 18, 0.4, 0, 2);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
 
 .game-button:pressed {
-    -fx-background-color: rgba(56,189,248,0.35);
+    -fx-background-color: rgba(56,189,248,0.45);
 }
 
-/* ---------- Danger buttons — neon red glass ---------- */
+/* ---------- Danger buttons ---------- */
 .danger-button {
-    -fx-background-color: rgba(239,68,68,0.12);
-    -fx-text-fill: #fee2e2;
+    -fx-background-color: rgba(239,68,68,0.16);
+    -fx-text-fill: #991B1B;
     -fx-font-family: "Poppins", "Segoe UI", "Arial", sans-serif;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -73,20 +73,20 @@
     -fx-border-color: #EF4444;
     -fx-padding: 12 26 12 26;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.35), 12, 0.25, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.3), 12, 0.25, 0, 2);
 }
 
 .danger-button:hover {
-    -fx-background-color: rgba(239,68,68,0.25);
-    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.75), 18, 0.4, 0, 2);
+    -fx-background-color: rgba(239,68,68,0.3);
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.6), 18, 0.4, 0, 2);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
 
-/* ---------- Success buttons — neon green glass (Allocate/Finish) ---------- */
+/* ---------- Success buttons ---------- */
 .success-button {
-    -fx-background-color: rgba(34,197,94,0.12);
-    -fx-text-fill: #dcfce7;
+    -fx-background-color: rgba(34,197,94,0.20);
+    -fx-text-fill: #166534;
     -fx-font-family: "Poppins", "Segoe UI", "Arial", sans-serif;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
@@ -100,55 +100,55 @@
 }
 
 .success-button:hover {
-    -fx-background-color: rgba(34,197,94,0.25);
-    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.65), 16, 0.35, 0, 1);
+    -fx-background-color: rgba(34,197,94,0.35);
+    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.55), 16, 0.35, 0, 1);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
 
 /* ---------- Labels ---------- */
 .info-label {
-    -fx-text-fill: #cbd5e1;
+    -fx-text-fill: #1E293B;
     -fx-font-family: "Poppins", "Segoe UI", "Arial", sans-serif;
     -fx-font-size: 14px;
 }
 
 .status-label {
-    -fx-text-fill: #38BDF8;
+    -fx-text-fill: #0369A1;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 13px;
     -fx-font-style: italic;
 }
 
 .score-label {
-    -fx-text-fill: #22C55E;
+    -fx-text-fill: #15803D;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 
 .timer-label {
-    -fx-text-fill: #EF4444;
+    -fx-text-fill: #DC2626;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 
-/* ---------- Glassmorphism info cards (process/resource rows) ---------- */
+/* ---------- Glassmorphism info cards ---------- */
 .info-card {
-    -fx-background-color: rgba(255,255,255,0.04);
+    -fx-background-color: rgba(255,255,255,0.75);
     -fx-background-radius: 10;
-    -fx-border-color: rgba(56,189,248,0.35);
+    -fx-border-color: rgba(56,189,248,0.6);
     -fx-border-radius: 10;
     -fx-border-width: 1;
     -fx-padding: 10 14 10 14;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 13px;
-    -fx-text-fill: #e2e8f0;
+    -fx-text-fill: #1E293B;
 }
 
 .info-card-waiting {
-    -fx-background-color: rgba(239,68,68,0.10);
+    -fx-background-color: rgba(239,68,68,0.12);
     -fx-background-radius: 10;
     -fx-border-color: #EF4444;
     -fx-border-radius: 10;
@@ -156,12 +156,12 @@
     -fx-padding: 10 14 10 14;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 13px;
-    -fx-text-fill: #fecaca;
-    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.4), 10, 0.25, 0, 0);
+    -fx-text-fill: #991B1B;
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.25), 10, 0.25, 0, 0);
 }
 
 .info-card-finished {
-    -fx-background-color: rgba(34,197,94,0.10);
+    -fx-background-color: rgba(34,197,94,0.14);
     -fx-background-radius: 10;
     -fx-border-color: #22C55E;
     -fx-border-radius: 10;
@@ -169,19 +169,18 @@
     -fx-padding: 10 14 10 14;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 13px;
-    -fx-text-fill: #bbf7d0;
-    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.4), 10, 0.25, 0, 0);
+    -fx-text-fill: #166534;
+    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.25), 10, 0.25, 0, 0);
 }
 
-/* ---------- Glass panel container (holds each list) ---------- */
+/* ---------- Glass panel container ---------- */
 .panel-box {
-    -fx-background-color: rgba(255,255,255,0.03);
+    -fx-background-color: rgba(255,255,255,0.6);
     -fx-background-radius: 16;
-    -fx-border-color: rgba(56,189,248,0.25);
+    -fx-border-color: rgba(56,189,248,0.3);
     -fx-border-radius: 16;
-    -fx-border-width: 1.2;
-    -fx-padding: 14;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 18, 0.2, 0, 4);
+    -fx-border-width: 1;
+    -fx-padding: 12;
 }
 
 .transparent-scroll, .transparent-scroll .viewport {
@@ -189,31 +188,31 @@
     -fx-background-color: transparent;
 }
 
-/* ---------- Graph legend (meaning of node colors) ---------- */
+/* ---------- Graph legend ---------- */
 .graph-legend {
-    -fx-background-color: rgba(15,23,42,0.85);
+    -fx-background-color: rgba(255,255,255,0.92);
     -fx-background-radius: 12;
-    -fx-border-color: rgba(56,189,248,0.4);
+    -fx-border-color: rgba(56,189,248,0.5);
     -fx-border-radius: 12;
     -fx-border-width: 1;
     -fx-padding: 4 12 4 12;
 }
 
 .graph-legend-text {
-    -fx-text-fill: #cbd5e1;
+    -fx-text-fill: #334155;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 11px;
 }
 
 /* ---------- Click-to-select readout ---------- */
 .selection-label {
-    -fx-text-fill: #FBBF24;
+    -fx-text-fill: #92400E;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
-    -fx-background-color: rgba(251,191,36,0.10);
+    -fx-background-color: rgba(251,191,36,0.15);
     -fx-background-radius: 10;
-    -fx-border-color: rgba(251,191,36,0.6);
+    -fx-border-color: rgba(217,119,6,0.6);
     -fx-border-radius: 10;
     -fx-border-width: 1.2;
     -fx-padding: 8 14 8 14;
@@ -221,21 +220,21 @@
 
 /* ---------- First-time onboarding tip bar ---------- */
 .tutorial-bar {
-    -fx-background-color: rgba(251,191,36,0.08);
+    -fx-background-color: rgba(251,191,36,0.12);
     -fx-background-radius: 12;
-    -fx-border-color: rgba(251,191,36,0.7);
+    -fx-border-color: rgba(217,119,6,0.7);
     -fx-border-radius: 12;
     -fx-border-width: 1;
     -fx-padding: 8 16 8 16;
 }
 
 .tutorial-tip {
-    -fx-text-fill: #fef3c7;
+    -fx-text-fill: #713F12;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 13px;
 }
 
-/* ---------- Result screen TextArea — terminal console style ---------- */
+/* ---------- Result screen TextArea (kept as a dark console) ---------- */
 .result-text-area .content {
     -fx-background-color: #0a0f1a;
 }
@@ -245,7 +244,7 @@
     -fx-text-fill: #22C55E;
     -fx-background-radius: 12;
     -fx-border-radius: 12;
-    -fx-border-color: rgba(56,189,248,0.35);
+    -fx-border-color: rgba(56,189,248,0.5);
     -fx-border-width: 1.5;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 13px;
@@ -256,16 +255,16 @@
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
     -fx-font-size: 34px;
     -fx-font-weight: bold;
-    -fx-text-fill: #22C55E;
-    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.65), 20, 0.45, 0, 0);
+    -fx-text-fill: #16A34A;
+    -fx-effect: dropshadow(gaussian, rgba(22,163,74,0.45), 20, 0.45, 0, 0);
 }
 
 .lose-title {
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
     -fx-font-size: 34px;
     -fx-font-weight: bold;
-    -fx-text-fill: #EF4444;
-    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.65), 20, 0.45, 0, 0);
+    -fx-text-fill: #DC2626;
+    -fx-effect: dropshadow(gaussian, rgba(220,38,38,0.45), 20, 0.45, 0, 0);
 }
 
 /* ==========================================================
@@ -273,14 +272,13 @@
    ========================================================== */
 
 .graph-canvas {
-    -fx-background-color: rgba(255,255,255,0.02);
+    -fx-background-color: rgba(255,255,255,0.6);
     -fx-background-radius: 18;
-    -fx-border-color: rgba(56,189,248,0.2);
+    -fx-border-color: rgba(56,189,248,0.4);
     -fx-border-radius: 18;
     -fx-border-width: 1;
 }
 
-/* ---------- Node circles (Process = slightly bigger, Resource = slightly smaller) ---------- */
 .node-circle-process {
     -fx-fill: radial-gradient(center 35% 35%, radius 70%, #38BDF8, #0F172A);
     -fx-stroke: #38BDF8;
@@ -300,7 +298,6 @@
     -fx-font-weight: bold;
 }
 
-/* ---------- Node states (override stroke color based on situation) ---------- */
 .node-state-idle {
     -fx-stroke: #38BDF8;
 }
@@ -331,7 +328,6 @@
     -fx-fill: radial-gradient(center 35% 35%, radius 70%, #EF4444, #0F172A);
 }
 
-/* ---------- Connection lines ---------- */
 .connection-line {
     -fx-stroke-width: 2.5;
 }
@@ -356,7 +352,6 @@
     -fx-opacity: 1.0;
 }
 
-/* ---------- Data packet (moving glowing circle) ---------- */
 .data-packet {
     -fx-fill: #38BDF8;
     -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.9), 12, 0.6, 0, 0);
@@ -369,17 +364,17 @@
 
 /* ---------- Deadlock warning card ---------- */
 .warning-card {
-    -fx-background-color: rgba(239,68,68,0.15);
+    -fx-background-color: rgba(239,68,68,0.12);
     -fx-background-radius: 16;
     -fx-border-color: #EF4444;
     -fx-border-radius: 16;
     -fx-border-width: 2;
     -fx-padding: 16 30 16 30;
-    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.7), 20, 0.4, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.5), 20, 0.4, 0, 0);
 }
 
 .warning-card-text {
-    -fx-text-fill: #fecaca;
+    -fx-text-fill: #7F1D1D;
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
     -fx-font-size: 18px;
     -fx-font-weight: bold;
@@ -387,53 +382,53 @@
 
 /* ---------- Safe state card ---------- */
 .safe-card {
-    -fx-background-color: rgba(34,197,94,0.15);
+    -fx-background-color: rgba(34,197,94,0.14);
     -fx-background-radius: 16;
     -fx-border-color: #22C55E;
     -fx-border-radius: 16;
     -fx-border-width: 2;
     -fx-padding: 16 30 16 30;
-    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.7), 20, 0.4, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.5), 20, 0.4, 0, 0);
 }
 
 .safe-card-text {
-    -fx-text-fill: #bbf7d0;
+    -fx-text-fill: #14532D;
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
     -fx-font-size: 18px;
     -fx-font-weight: bold;
 }
 
-/* ---------- Counter labels (Move/Allocation counters) ---------- */
 .counter-label {
-    -fx-text-fill: #94a3b8;
+    -fx-text-fill: #475569;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 13px;
 }
-/* ---------- Instructions Alert dialog theming ---------- */
+
+/* ---------- Dialogs ---------- */
 .dialog-pane {
-    -fx-background-color: #0F172A;
+    -fx-background-color: #F1F5F9;
 }
 
 .dialog-pane .header-panel {
-    -fx-background-color: #111827;
+    -fx-background-color: #E2E8F0;
 }
 
 .dialog-pane .header-panel .label {
-    -fx-text-fill: #38BDF8;
+    -fx-text-fill: #0369A1;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
 }
 
 .dialog-pane .content.label {
-    -fx-text-fill: #cbd5e1;
+    -fx-text-fill: #1E293B;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 13px;
 }
 
 .dialog-pane .button-bar .button {
-    -fx-background-color: rgba(56,189,248,0.15);
-    -fx-text-fill: #e0f2fe;
+    -fx-background-color: rgba(56,189,248,0.20);
+    -fx-text-fill: #075985;
     -fx-background-radius: 8;
     -fx-border-radius: 8;
     -fx-border-color: #38BDF8;
@@ -441,38 +436,38 @@
 }
 
 .dialog-pane .button-bar .button:hover {
-    -fx-background-color: rgba(56,189,248,0.3);
+    -fx-background-color: rgba(56,189,248,0.35);
 }
 
 .dialog-pane .button-bar .confirm-danger {
-    -fx-background-color: rgba(239,68,68,0.18);
-    -fx-text-fill: #fee2e2;
+    -fx-background-color: rgba(239,68,68,0.16);
+    -fx-text-fill: #991B1B;
     -fx-border-color: #EF4444;
     -fx-border-width: 1.2;
 }
 
 .dialog-pane .button-bar .confirm-danger:hover {
-    -fx-background-color: rgba(239,68,68,0.35);
+    -fx-background-color: rgba(239,68,68,0.3);
 }
 
-/* ---------- Instructions dialog (custom themed cards) ---------- */
+/* ---------- Instructions dialog cards ---------- */
 .instr-heading {
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #38BDF8;
-    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.5), 12, 0.35, 0, 0);
+    -fx-text-fill: #0369A1;
+    -fx-effect: dropshadow(gaussian, rgba(2,132,199,0.35), 12, 0.35, 0, 0);
 }
 
 .instr-card-title {
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #e0f2fe;
+    -fx-text-fill: #0C4A6E;
 }
 
 .instr-card-text {
-    -fx-text-fill: #cbd5e1;
+    -fx-text-fill: #334155;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 13px;
     -fx-text-alignment: justify;
@@ -489,27 +484,27 @@
 }
 
 .instr-card-goal {
-    -fx-background-color: rgba(56,189,248,0.10);
+    -fx-background-color: rgba(56,189,248,0.14);
     -fx-border-color: #38BDF8;
 }
 
 .instr-card-allocate {
-    -fx-background-color: rgba(34,197,94,0.10);
+    -fx-background-color: rgba(34,197,94,0.14);
     -fx-border-color: #22C55E;
 }
 
 .instr-card-release {
-    -fx-background-color: rgba(245,158,11,0.12);
+    -fx-background-color: rgba(245,158,11,0.16);
     -fx-border-color: #f59e0b;
 }
 
 .instr-card-finish {
-    -fx-background-color: rgba(34,197,94,0.10);
+    -fx-background-color: rgba(34,197,94,0.14);
     -fx-border-color: #4ADE80;
 }
 
 .instr-card-warn {
-    -fx-background-color: rgba(239,68,68,0.12);
+    -fx-background-color: rgba(239,68,68,0.14);
     -fx-border-color: #EF4444;
 }
 
@@ -518,34 +513,34 @@
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-text-fill: #EF4444;
-    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.5), 12, 0.35, 0, 0);
+    -fx-text-fill: #DC2626;
+    -fx-effect: dropshadow(gaussian, rgba(220,38,38,0.35), 12, 0.35, 0, 0);
 }
 
 .cycle-sequence {
-    -fx-text-fill: #fbbf24;
+    -fx-text-fill: #92400E;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-padding: 6 10 6 10;
-    -fx-background-color: rgba(251,191,36,0.08);
+    -fx-background-color: rgba(251,191,36,0.18);
     -fx-background-radius: 8;
 }
 
 .cycle-meaning {
-    -fx-text-fill: #cbd5e1;
+    -fx-text-fill: #334155;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 13px;
 }
 
 .cycle-tip {
-    -fx-text-fill: #94a3b8;
+    -fx-text-fill: #64748B;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 12px;
     -fx-font-style: italic;
 }
 
-/* ---------- Profile chart styling ---------- */
+/* ---------- Profile chart ---------- */
 .profile-chart {
     -fx-background-color: transparent;
 }
@@ -555,20 +550,20 @@
 }
 
 .profile-chart .chart-vertical-grid-lines {
-    -fx-stroke: rgba(56,189,248,0.15);
+    -fx-stroke: rgba(56,189,248,0.3);
 }
 
 .profile-chart .chart-horizontal-grid-lines {
-    -fx-stroke: rgba(56,189,248,0.15);
+    -fx-stroke: rgba(56,189,248,0.3);
 }
 
 .profile-chart .axis {
-    -fx-tick-label-fill: #cbd5e1;
-    -fx-tick-mark-stroke: rgba(56,189,248,0.4);
+    -fx-tick-label-fill: #334155;
+    -fx-tick-mark-stroke: rgba(56,189,248,0.5);
 }
 
 .profile-chart .axis-label {
-    -fx-text-fill: #38BDF8;
+    -fx-text-fill: #0369A1;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
 }
 
@@ -577,46 +572,46 @@
 }
 
 .profile-chart .chart-title {
-    -fx-text-fill: #e0f2fe;
+    -fx-text-fill: #164E63;
 }
 
 /* ---------- Practice Lab scenario buttons ---------- */
 .practice-button-title {
-    -fx-text-fill: #dcfce7;
+    -fx-text-fill: #14532D;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
 
 .practice-button-desc {
-    -fx-text-fill: #bbf7d0;
+    -fx-text-fill: #166534;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 11px;
 }
 
 /* ---------- Login screen text field ---------- */
 .login-text-field {
-    -fx-background-color: rgba(255,255,255,0.06);
+    -fx-background-color: #FFFFFF;
     -fx-border-color: #38BDF8;
     -fx-border-width: 1.5;
     -fx-border-radius: 12;
     -fx-background-radius: 12;
-    -fx-text-fill: #e0f2fe;
+    -fx-text-fill: #0F172A;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 15px;
     -fx-prompt-text-fill: #64748b;
     -fx-padding: 10 16 10 16;
-    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.25), 10, 0.2, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.3), 10, 0.2, 0, 2);
 }
 
 .login-text-field:focused {
-    -fx-border-color: #60a5fa;
+    -fx-border-color: #0284C7;
     -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.5), 16, 0.35, 0, 2);
 }
 
 /* ---------- Error label ---------- */
 .error-label {
-    -fx-text-fill: #EF4444;
+    -fx-text-fill: #DC2626;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 13px;
 }
@@ -625,25 +620,24 @@
    Enhanced UI Classes (Mode Selection, Levels, Game Screen)
    ========================================================== */
 
-/* ---------- Game mode selection cards ---------- */
 .mode-card {
-    -fx-background-color: rgba(255,255,255,0.04);
+    -fx-background-color: rgba(255,255,255,0.8);
     -fx-background-radius: 16;
-    -fx-border-color: rgba(56,189,248,0.35);
+    -fx-border-color: rgba(56,189,248,0.5);
     -fx-border-radius: 16;
     -fx-border-width: 1.5;
-    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.2), 14, 0.2, 0, 3);
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.25), 14, 0.2, 0, 3);
     -fx-cursor: hand;
 }
 
 .mode-card:hover {
-    -fx-background-color: rgba(56,189,248,0.10);
+    -fx-background-color: rgba(224,242,254,0.9);
     -fx-border-color: #38BDF8;
-    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.5), 22, 0.35, 0, 3);
+    -fx-effect: dropshadow(gaussian, rgba(56,189,248,0.45), 22, 0.35, 0, 3);
 }
 
 .mode-card-mastered {
-    -fx-background-color: rgba(34,197,94,0.10);
+    -fx-background-color: rgba(236,253,245,0.9);
     -fx-background-radius: 16;
     -fx-border-color: #22C55E;
     -fx-border-radius: 16;
@@ -653,109 +647,104 @@
 
 .mode-card-title {
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
-    -fx-text-fill: #38BDF8;
+    -fx-text-fill: #0369A1;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
 
 .mode-card-desc {
-    -fx-text-fill: #cbd5e1;
+    -fx-text-fill: #334155;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 13px;
     -fx-font-style: italic;
 }
 
 .mode-card-levels {
-    -fx-text-fill: #94a3b8;
+    -fx-text-fill: #475569;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 12px;
 }
 
 .mode-card-full {
-    -fx-text-fill: #64748b;
+    -fx-text-fill: #64748B;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 12px;
 }
 
 .mastery-badge {
-    -fx-text-fill: #4ADE80;
+    -fx-text-fill: #15803D;
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
     -fx-font-size: 11px;
     -fx-font-weight: bold;
 }
 
-/* ---------- Level cards ---------- */
 .level-card-title {
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
-    -fx-text-fill: #f59e0b;
+    -fx-text-fill: #D97706;
     -fx-font-size: 18px;
     -fx-font-weight: bold;
 }
 
 .stars-label {
-    -fx-text-fill: #FBBF24;
+    -fx-text-fill: #D97706;
     -fx-font-size: 16px;
     -fx-font-family: "Segoe UI", sans-serif;
 }
 
 .stars-big {
-    -fx-text-fill: #FBBF24;
+    -fx-text-fill: #D97706;
     -fx-font-size: 42px;
     -fx-font-family: "Segoe UI", sans-serif;
 }
 
-/* ---------- Concept badge (top of GameScreen) ---------- */
 .concept-badge {
-    -fx-background-color: rgba(56,189,248,0.15);
+    -fx-background-color: rgba(224,242,254,0.9);
     -fx-background-radius: 20;
     -fx-border-color: #38BDF8;
     -fx-border-radius: 20;
     -fx-border-width: 1.2;
-    -fx-text-fill: #e0f2fe;
+    -fx-text-fill: #075985;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
     -fx-padding: 6 18 6 18;
 }
 
-/* ---------- Mission banner ---------- */
 .mission-banner {
-    -fx-background-color: rgba(245,158,11,0.12);
+    -fx-background-color: rgba(254,243,199,0.9);
     -fx-background-radius: 12;
-    -fx-border-color: #f59e0b;
+    -fx-border-color: #F59E0B;
     -fx-border-radius: 12;
     -fx-border-width: 1.2;
-    -fx-text-fill: #fde68a;
+    -fx-text-fill: #92400E;
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
     -fx-padding: 10 18 10 18;
 }
 
-/* ---------- OS Guide panel ---------- */
 .os-guide-label {
-    -fx-text-fill: #a5f3fc;
+    -fx-text-fill: #155E75;
     -fx-font-family: "Poppins", "Consolas", monospace;
     -fx-font-size: 12px;
-    -fx-background-color: rgba(56,189,248,0.06);
+    -fx-background-color: rgba(236,254,255,0.9);
     -fx-background-radius: 10;
-    -fx-border-color: rgba(56,189,248,0.25);
+    -fx-border-color: rgba(56,189,248,0.6);
     -fx-border-radius: 10;
     -fx-border-width: 1;
     -fx-padding: 8 12 8 12;
 }
 
-/* ---------- Achievement unlocked banner ---------- */
 .achievement-unlocked {
-    -fx-background-color: rgba(251,191,36,0.15);
+    -fx-background-color: rgba(254,249,195,0.9);
     -fx-background-radius: 20;
     -fx-border-color: #FBBF24;
     -fx-border-radius: 20;
     -fx-border-width: 1.5;
-    -fx-text-fill: #FDE68A;
+    -fx-text-fill: #854D0E;
     -fx-font-family: "Orbitron", "Segoe UI", sans-serif;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-padding: 8 22 8 22;
-    -fx-effect: dropshadow(gaussian, rgba(251,191,36,0.5), 16, 0.3, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(217,119,6,0.4), 16, 0.3, 0, 0);
 }
