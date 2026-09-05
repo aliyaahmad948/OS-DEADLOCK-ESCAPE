@@ -19,21 +19,11 @@
 
 ---
 
-## Hero
-
-<p align="center">
-  <img src="docs/screenshots/demo.gif" alt="Deadlock Escape Game - gameplay demo" width="720">
-</p>
-
-> *Drop your gameplay demo GIF (or a hero screenshot) at `docs/screenshots/demo.gif` — this is the single most important visual on the page.*
-
----
-
 ## Table of Contents
 
 - [About The Project](#about-the-project)
 - [Features](#features)
-- [Screenshots & Demo](#screenshots--demo)
+- [Screenshots](#screenshots)
 - [Tech Stack](#tech-stack)
 - [Architecture Overview](#architecture-overview)
 - [Educational Value](#educational-value)
@@ -93,9 +83,8 @@ What makes it more than a pretty visualization:
 
 ---
 
-## Screenshots & Demo
+## Screenshots
 
-> *Full gameplay demo — see the GIF at the top of the page.*
 > *Every image below is a placeholder — drop your screenshots into `docs/screenshots/` with these exact file names and they'll render automatically.*
 
 ### Onboarding & Menu
