@@ -159,6 +159,13 @@ What makes it more than a pretty visualization:
   </table>
 </p>
 
+#### Time Out
+
+<p align="center">
+  <img src="docs/screenshots/time-out.png" width="400" alt="Time out game over screen">
+  <em>The shift deadline hits — the timer runs out and the system shuts down.</em>
+</p>
+
 ### Leaderboard & Profile
 
 <p align="center">
