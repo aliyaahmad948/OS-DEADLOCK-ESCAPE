@@ -57,7 +57,7 @@ What makes it more than a pretty visualization:
 ## Features
 
 ### 🎮 Gameplay
-- **Click-to-select nodes** on the graph — no dropdowns. Selected nodes glow cyan; your current process/resource selection is shown live.
+- **Click-to-select nodes** on the graph — no dropdowns. Selected nodes glow gold; your current process/resource selection is shown live.
 - **Allocate / Release / Finish** — grant resources, free them, complete processes; auto-finish when a process holds nothing.
 - **Detect Deadlock** — run a DFS cycle check on demand with a red cycle overlay.
 - **Banker's Algorithm mode** — safe requests granted 🥇 (+25 GOLD), unsafe requests rejected with an explanation.
@@ -84,8 +84,6 @@ What makes it more than a pretty visualization:
 ---
 
 ## Screenshots
-
-> *Every image below is a placeholder — drop your screenshots into `docs/screenshots/` with these exact file names and they'll render automatically.*
 
 ### Onboarding & Menu
 
@@ -332,7 +330,7 @@ Or open **IntelliJ IDEA** → run `application/Main.java`.
 | 🎯 **Goal** | Finish **all** processes in a safe order before the timer ends. |
 | 📥 **Allocate** | Click a *process* node → click a *resource* node → **Allocate**. Free resource = granted (+10); held resource = your process starts **waiting**. |
 | ↪ **Release** | Select process + resource → **Release**. A process finishes automatically when it holds nothing (+25). |
-| ✅ **Finish** | Select a process with no held resources → **Finish** it manually. |
+| ✅ **Finish** | Select any process that isn't waiting → **Finish** releases all its held resources and completes it (+25). |
 | ⚠️ **Warning** | If processes wait on each other in a circle, that's a **deadlock** — you lose the level. Use **Detect Deadlock** to check before it's too late. |
 | 🚪 **Exit** | Exit confirms first and never counts as a loss. |
 
